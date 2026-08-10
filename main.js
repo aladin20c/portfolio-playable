@@ -27,8 +27,26 @@ function preloadAudio(id){
 
 
 //animation
-function animate() {
-  gameLoop();
+//animation
+let lastTime = 0;
+let accumulator = 0;
+const TARGET_DELTA = 1/60;
+
+function animate(currentTime) {
+  const deltaTime = lastTime ? (currentTime - lastTime) / 1000 : TARGET_DELTA;
+  lastTime = currentTime;
+  
+  accumulator += deltaTime;
+  
+  // Run gameLoop exactly at 60fps regardless of refresh rate
+  while (accumulator >= TARGET_DELTA) {
+    gameLoop();
+    accumulator -= TARGET_DELTA;
+  }
+  
+  // Prevent accumulator from growing too large
+  if (accumulator > 0.1) accumulator = 0;
+  
   requestAnimationFrame(animate);
 }
 
