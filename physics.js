@@ -1439,6 +1439,11 @@ function buildWorld(){
             duration:'summer 2025, Paris',
             description:'worked with several teams on different projects, in development, optimisation, maintenance and migration'
         },
+        {
+            job:'Research Engineer, Dassault Syst.',
+            duration:'summer 2026, Vélizy',
+            description:'Building high-performance 2D/3D manipulation, annotation and segmentation tools for volumetric medical data. Investigated server-side rendering.'
+        },
     ];
 
     for (let i=0; i<experienceBanners.length;i++){
@@ -1530,6 +1535,46 @@ function buildWorld(){
 
 
     //ouidou
+    const ouidou = new MovingObject(new Vector(10400,550), new Vector(10400,800), PLAYER_INDEX, PLAYER_INDEX,null,true);
+    const ouidouSprite = new Sprite('ouidou', ouidou.position, PLAYER_INDEX-1,PLAYER_INDEX-1);
+    ouidou.setShape(new AABB(ouidou.position,ouidouSprite.width,ouidouSprite.height));
+    ouidou.add(ouidouSprite);
+    ouidou.setDuration(1);
+    ouidou.setEasing(pow2Easing);
+    ouidou.shouldActivate = function() {
+        return ouidou.endPosition.distanceTo2(PLAYER.position) < 490000;
+    };
+    UPDATE_OBJECTS.push(ouidou);
+    COLLISION_OBJECTS.push(ouidou);
+    DRAW_OBJECTS.push(ouidouSprite);
+
+
+    //dassault
+    const ds = new MovingObject(new Vector(11400,200), new Vector(11400,820), PLAYER_INDEX, PLAYER_INDEX);
+    const dsSprite = new Sprite('ds', ds.position, PLAYER_INDEX-1,PLAYER_INDEX-1);
+    ds.setShape(new AABB(ds.position,dsSprite.width,dsSprite.height));
+    ds.add(dsSprite);
+    ds.setDuration(1);
+    ds.setEasing(pow2Easing);
+    ds.shouldActivate = function() {
+        return ds.endPosition.distanceTo2(PLAYER.position) < 490000;
+    };
+    UPDATE_OBJECTS.push(ds);
+    COLLISION_OBJECTS.push(ds);
+    DRAW_OBJECTS.push(dsSprite);
+
+    const meditwin = new MovingObject(new Vector(11400,1300), new Vector(11400,920), PLAYER_INDEX, PLAYER_INDEX);
+    const meditwinSprite = new Sprite('meditwin', meditwin.position, PLAYER_INDEX-1,PLAYER_INDEX-1);
+    meditwin.setShape(new AABB(meditwin.position,meditwinSprite.width,meditwinSprite.height));
+    meditwin.add(meditwinSprite);
+    meditwin.setDuration(1);
+    meditwin.setEasing(pow2Easing);
+    meditwin.shouldActivate = function() {
+        return meditwin.endPosition.distanceTo2(PLAYER.position) < 490000;
+    };
+    UPDATE_OBJECTS.push(meditwin);
+    COLLISION_OBJECTS.push(meditwin);
+    DRAW_OBJECTS.push(meditwinSprite);
 
 
 
